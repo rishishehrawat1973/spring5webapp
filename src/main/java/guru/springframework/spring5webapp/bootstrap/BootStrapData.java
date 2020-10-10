@@ -1,9 +1,11 @@
 package guru.springframework.spring5webapp.bootstrap;
 
+import guru.springframework.spring5webapp.repository.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import guru.springframework.spring5webapp.domain.Book;
+import java.util.*;
+import guru.springframework.spring5webapp.domain.*;
+//import guru.springframework.spring5webapp.domain.*;
 import guru.springframework.spring5webapp.repository.AuthorRepository;
 import guru.springframework.spring5webapp.repository.BookRepository;
 
@@ -13,13 +15,15 @@ import java.util.Iterator;
 public class BootStrapData implements CommandLineRunner {
 	
 	private AuthorRepository authorRepo;
+	private BookRepository bookRepo;
+	private PublisherRepository pubRepo;
 
-	public BootStrapData(AuthorRepository authorRepo, BookRepository bookRepo) {
+	public BootStrapData(AuthorRepository authorRepo, BookRepository bookRepo,PublisherRepository pubRepo ) {
 		this.authorRepo = authorRepo;
 		this.bookRepo = bookRepo;
+		this.pubRepo = pubRepo;
 	}
 
-	private BookRepository bookRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -28,27 +32,20 @@ public class BootStrapData implements CommandLineRunner {
 		Book firstBook = new Book();
 		firstBook.setBookName("First Book");
 		firstBook.setIsbnCode("23456");
-		Long retId = bookRepo.save(firstBook).getId();
-		System.out.println("Saved -----> id : "+retId);
-		Iterable iterable = bookRepo.findAll();
-		Iterator itr = iterable.iterator();
-		while (itr.hasNext()) {
-			System.out.println("value is "+itr.next());
-		}
-
-
-		
-
-		
-		
-		/*
 		Author firstAuthor = new Author();
-		
 		firstAuthor.setName("First Author");
 	    Set<Author> books = new HashSet<>(); 
 	    books.add(firstAuthor);
+		Publisher pub = new Publisher("LiberalBooks","NDSE");
 		firstBook.setAuthors(books);
-		*/
+		firstBook.setPublisher(pub);
+		Long retId2 = pubRepo.save(pub).getId();
+		System.out.println("Saved -----> pub id : "+retId2);
+		Long retId1 = authorRepo.save(firstAuthor).getId();
+		Long retId = bookRepo.save(firstBook).getId();
+		System.out.println("Saved -----> id : "+retId+"id1"+retId1);
+
+
 	}
 
 }
