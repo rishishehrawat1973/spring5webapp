@@ -1,15 +1,13 @@
-package guru.springframework.bootstrap;
-
-import java.util.HashSet;
-import java.util.Set;
+package guru.springframework.spring5webapp.bootstrap;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import guru.springframework.domain.Author;
-import guru.springframework.domain.Book;
-import guru.springframework.repository.AuthorRepository;
-import guru.springframework.repository.BookRepository;
+import guru.springframework.spring5webapp.domain.Book;
+import guru.springframework.spring5webapp.repository.AuthorRepository;
+import guru.springframework.spring5webapp.repository.BookRepository;
+
+import java.util.Iterator;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
@@ -31,9 +29,13 @@ public class BootStrapData implements CommandLineRunner {
 		firstBook.setBookName("First Book");
 		firstBook.setIsbnCode("23456");
 		Long retId = bookRepo.save(firstBook).getId();
-		System.out.println("Saved ----->");		
-		System.out.println("Reterieving saved id ----->"+bookRepo.findById(retId));
-		
+		System.out.println("Saved -----> id : "+retId);
+		Iterable iterable = bookRepo.findAll();
+		Iterator itr = iterable.iterator();
+		while (itr.hasNext()) {
+			System.out.println("value is "+itr.next());
+		}
+
 
 		
 

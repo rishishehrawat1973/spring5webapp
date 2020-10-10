@@ -1,4 +1,4 @@
-package guru.springframework.bootstrap;
+package guru.springframework.spring5webapp.bootstrap;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
