@@ -15,6 +15,12 @@ import guru.springframework.repository.BookRepository;
 public class BootStrapData implements CommandLineRunner {
 	
 	private AuthorRepository authorRepo;
+
+	public BootStrapData(AuthorRepository authorRepo, BookRepository bookRepo) {
+		this.authorRepo = authorRepo;
+		this.bookRepo = bookRepo;
+	}
+
 	private BookRepository bookRepo;
 
 	@Override
