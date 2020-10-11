@@ -40,6 +40,7 @@ public class BootStrapData implements CommandLineRunner {
 		firstBook.setAuthors(books);
 		firstBook.setPublisher(pub);
 		Long retId2 = pubRepo.save(pub).getId();
+
 		System.out.println("Saved -----> pub id : "+retId2);
 		Long retId1 = authorRepo.save(firstAuthor).getId();
 		Long retId = bookRepo.save(firstBook).getId();
